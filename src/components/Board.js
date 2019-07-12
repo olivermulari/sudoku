@@ -1,7 +1,9 @@
 import React from 'react';
 import { randomize } from '../scripts/randomize.js';
+import { generate } from '../scripts/generator';
 import Row from './Row';
 
+/*
 const base = () => (
     [[1, 2, 3, 4, 5, 6, 7, 8, 9],
     [4, 5, 6, 7, 8, 9, 1, 2, 3],
@@ -13,15 +15,15 @@ const base = () => (
     [6, 4, 2, 9, 7, 8, 5, 3, 1],
     [9, 7, 8, 5, 3, 1, 6, 4, 2]]
 );
+*/
 
 class Board extends React.Component {
     state = {
-        rows: base(),
+        rows: generate(),
         size: 30 //px
     }
   
     render() {
-        randomize(this.state.rows, 10);
         return (
             <div style={this.style}>{
                 this.state.rows.map((row) => (

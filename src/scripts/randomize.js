@@ -1,6 +1,7 @@
-import { isValid } from './check.js';
-import { options } from './options.js';
+import { isValid } from './check';
+import { options } from './options';
 import { removeValues } from './empty';
+import { generate } from './generator';
 
 export function randomize(board, times) {
     
@@ -10,4 +11,6 @@ export function randomize(board, times) {
     // const caseNum = Math.floor(Math.random() * 5);
 
     // removeValues(board, 30);
+
+    generate();
 }
