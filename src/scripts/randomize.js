@@ -1,5 +1,6 @@
 import { isValid } from './check.js';
 import { options } from './options.js';
+import { removeValues } from './empty';
 
 export function randomize(board, times) {
     
@@ -8,5 +9,5 @@ export function randomize(board, times) {
 
     // const caseNum = Math.floor(Math.random() * 5);
 
-    console.log(options(board, 1, 4))
+    // removeValues(board, 30);
 }
