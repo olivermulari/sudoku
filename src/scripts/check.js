@@ -22,7 +22,7 @@ function getColumns(board) {
     return arr;
 }
 
-function getColumn(board, col) {
+export function getColumn(board, col) {
     return board.map((row) => row[col - 1]);
 }
 
@@ -36,7 +36,7 @@ function getBoxes(board) {
     return arr;
 }
 
-function getBox(board, row, col) {
+export function getBox(board, row, col) {
     const arr = [];
     for (let x = 0; x < 3; x++) {
         for (let y = 0; y < 3; y++) {
