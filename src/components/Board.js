@@ -1,36 +1,41 @@
 import React from 'react';
 import { randomize } from '../scripts/randomize.js';
-import { generate } from '../scripts/generator';
 import Row from './Row';
-
-/*
-const base = () => (
-    [[1, 2, 3, 4, 5, 6, 7, 8, 9],
-    [4, 5, 6, 7, 8, 9, 1, 2, 3],
-    [7, 8, 9, 1, 2, 3, 4, 5, 6],
-    [2, 1, 4, 3, 6, 5, 8, 9, 7],
-    [3, 6, 5, 8, 9, 7, 2, 1, 4],
-    [8, 9, 7, 2, 1, 4, 3, 6, 5],
-    [5, 3, 1, 6, 4, 2, 9, 7, 8],
-    [6, 4, 2, 9, 7, 8, 5, 3, 1],
-    [9, 7, 8, 5, 3, 1, 6, 4, 2]]
-);
-*/
 
 class Board extends React.Component {
     state = {
-        rows: generate(),
+        rows: randomize(),
+        displayOptions: true,
         size: 30 //px
+    }
+
+    displayOptions = () => {
+        this.setState(this.displayOptions, true);
     }
   
     render() {
-        return (
+        const board = (
             <div style={this.style}>{
                 this.state.rows.map((row) => (
-                    <Row tiles={row} tileSize={this.state.size}/>
+                    <Row id={(this.state.rows.indexOf(row) + 1) * 9} onClick={this.displayOptions} tiles={row} tileSize={this.state.size}/>
                 ))
             }</div>
         )
+        const options = (
+            <div>
+                <Row tiles={[1, 2, 3, 4, 5, 6, 7, 8, 9]} tileSize={this.state.size} />
+            </div>
+        )
+        if (this.state.displayOptions) {
+            return (
+                <div>
+                    {board}
+                    {options}
+                </div>
+            )
+        } else {
+            return board;
+        }
     }
 
     style = {

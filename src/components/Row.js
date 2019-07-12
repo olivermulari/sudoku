@@ -6,7 +6,7 @@ class Row extends React.Component {
     return (
         <div style={this.style}>{
             this.props.tiles.map((num) => (
-                <Tile value={num} size={this.props.tileSize}/>
+                <Tile onClick={this.props.displayOptions} value={num} size={this.props.tileSize}/>
             ))
         }
         </div>
