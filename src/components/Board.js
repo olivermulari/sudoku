@@ -1,7 +1,8 @@
 import React from 'react';
 import { randomize } from '../scripts/randomize.js';
-import Row from './Row';
+import Tile from './Tile';
 import OptionsRow from './OptionsRow';
+import './Board.css';
 
 class Board extends React.Component {
     constructor(props) {
@@ -10,13 +11,10 @@ class Board extends React.Component {
         this.board = randomize();
         this.static = this.mapStaticBoard(this.board);
         this.state = {
-            rows: this.board,
+            tiles: this.board,
             selected: [0, 0],
             showOptions: false,
             size: 30 //px
-        }
-        this.style = { 
-            margin: '30px 0 0 0'
         }
     }
 
@@ -34,27 +32,35 @@ class Board extends React.Component {
     }
 
     setValue = (value, tile) => {
-        const newBoard = this.state.rows;
+        const newBoard = this.state.tiles;
         newBoard[tile[0] - 1][tile[1] - 1] = value;
         this.setState({
-            rows: newBoard
+            tiles: newBoard
         })
     }
   
     render() {
         console.log("render")
+        let id1 = 1;
+        let id2 = 0;
         const board = (
-            <div style={this.style}>{
-                this.state.rows.map((row) => (
-                    <Row 
-                    id={this.state.rows.indexOf(row) + 1}
-                    key={this.state.rows.indexOf(row) + 1}
+            <div id="board" style={this.style}>{
+                this.state.tiles.flat().map((value) => {
+                    if (id2 === 9) {
+                        id2 = 0;
+                        id1++;
+                    }
+                    id2++;
+                    return(
+                    <Tile 
+                    id={[id1, id2]}
+                    key={[id1, id2]}
                     static={this.static}
                     selected={this.state.selected}
-                    onDisplayOptions={this.displayOptions} 
-                    tiles={row} 
+                    onDisplayOptions={this.displayOptions}
+                    value={value}
                     tileSize={this.state.size}/>
-                ))
+                )})
             }</div>
         )
         const options = (

@@ -1,0 +1,9 @@
+#board {
+    margin: 30px auto 0 auto;
+    display: inline-grid;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    grid-template-columns: repeat(9, 30px);
+    grid-template-rows: repeat(9, 30px);
+}
