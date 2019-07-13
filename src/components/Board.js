@@ -6,7 +6,7 @@ import './Board.css';
 
 class Board extends React.Component {
     constructor(props) {
-        console.log("constructed")
+        console.log("Board constructed!")
         super(props);
         this.board = randomize();
         this.static = this.mapStaticBoard(this.board);
@@ -24,7 +24,6 @@ class Board extends React.Component {
     }
 
     displayOptions = (id, isSelected) => {
-        console.log(id, isSelected)
         this.setState({
             showOptions: !isSelected,
             selected: !isSelected ? id : [0, 0]
@@ -38,9 +37,29 @@ class Board extends React.Component {
             tiles: newBoard
         })
     }
+
+    isSelected(row, col) {
+        return this.state.selected[0] === row && this.state.selected[1] === col
+    }
+
+    getTileStyle(row, col) {
+        const selectedColor = () => this.isSelected(row, col) ? 'green' : 'white';
+        const color = this.static[row - 1][col - 1] ? 'rgb(230, 230, 230)' : selectedColor();
+        const style = {
+            backgroundColor: color,
+            cursor: this.static[row - 1][col - 1] ? 'default' : 'pointer',
+            display: 'inline-block',
+            position: 'relative',
+            textAlign: 'center',
+            width: `${this.state.size - 2}px`,
+            height: `${this.state.size - 2}px`,
+            border: '1px #ccc solid',
+        }
+        return style;
+    }
   
     render() {
-        console.log("render")
+        console.log("board render")
         let id1 = 1;
         let id2 = 0;
         const board = (
@@ -55,8 +74,9 @@ class Board extends React.Component {
                     <Tile 
                     id={[id1, id2]}
                     key={[id1, id2]}
+                    style={this.getTileStyle(id1, id2)}
                     static={this.static}
-                    selected={this.state.selected}
+                    isSelected={this.isSelected(id1, id2)}
                     onDisplayOptions={this.displayOptions}
                     value={value}
                     tileSize={this.state.size}/>

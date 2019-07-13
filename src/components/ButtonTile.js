@@ -1,5 +1,6 @@
 import React from 'react';
 import './ButtonTile.css';
+import './Tile.css';
 
 class ButtonTile extends React.Component {
     constructor(props) {
@@ -22,9 +23,9 @@ class ButtonTile extends React.Component {
     button = () => (
         <div
         onClick={this.setValue}
-        className="tile-button" 
+        className="tile-button"
         style={this.style}>
-            <p style={this.pStyle}>{this.value}</p>
+            <p className="noselect" style={this.pStyle}>{this.value}</p>
         </div>
     );
 

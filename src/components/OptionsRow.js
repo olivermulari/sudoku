@@ -5,7 +5,7 @@ class OptionsRow extends React.Component {
     constructor(props) {
         super(props);
         this.style = {
-            margin: 'auto',
+            margin: '15px auto 0 auto',
             backgroundColor: 'rgb(200, 0, 0)',
             width: `${this.props.tileSize * 9}px`,
             height: `${this.props.tileSize}px`
