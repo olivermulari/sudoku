@@ -5,7 +5,7 @@ import Board from './components/Board';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div id="sudoku-game">
         <h1 style={style}>Sudoku</h1>
         <Board />
       </div>
@@ -14,7 +14,7 @@ class App extends React.Component {
 }
 
 const style = {
-  margin: '30px 0 0 0',
+  padding: '30px 0 0 0',
   textAlign: "center"
 }
 

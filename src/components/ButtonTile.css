@@ -1,0 +1,8 @@
+.tile-button {
+    color: white;
+    background-color: darkgray;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    border: 1px #ccc solid;
+}
