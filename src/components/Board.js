@@ -51,16 +51,36 @@ class Board extends React.Component {
                 selected: [0, 0],
                 tiles: newBoard
             }, () => {
-                this.checkAnswer(tile)
+                this.check(tile)
             })
         }
     }
 
-    checkAnswer(tile) {
-        const tileIsCorrect = tileIsValid(this.state.tiles, tile[0], tile[1])
+    check() {
+        const correct = this.checkAllTiles()
         const isCompleted = isComplete(this.state.tiles)
-        this.props.setGameBackground(tileIsCorrect, isCompleted)
-        this.updateIncorrectTiles(tile, !tileIsCorrect)
+        this.props.setGameBackground(correct, isCompleted)
+    }
+
+    checkAllTiles() {
+        let correct = true;
+        for (let row = 1; row <= 9; row++) {
+            for (let col = 1; col <= 9; col++) {
+                if (!this.static[row - 1][col - 1] 
+                &&   this.state.tiles[row - 1][col - 1] !== 0) {
+
+                    const isOK = this.checkTile([row, col])
+                    if (!isOK) correct = isOK
+                }
+            }
+        }
+        return correct;
+    }
+
+    checkTile(tile) {
+        const isOK = tileIsValid(this.state.tiles, tile[0], tile[1])
+        this.updateIncorrectTiles(tile, !isOK)
+        return isOK;
     }
 
     updateIncorrectTiles(tile, push) {

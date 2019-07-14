@@ -10,10 +10,15 @@ export function isValid(board) {
 }
 
 export function tileIsValid(board, row, col) {
-    const rowValid = arrayIsValid(board[row - 1]);
-    const colValid = arrayIsValid(getColumn(board, col));
-    const boxValid = arrayIsValid(getBox(board, row, col));
+    const value = board[row - 1][col - 1];
+    const rowValid = oneDuplicate(board[row - 1], value);
+    const colValid = oneDuplicate(getColumn(board, col), value);
+    const boxValid = oneDuplicate(getBox(board, row, col), value);
     return rowValid && colValid && boxValid;
+}
+
+function oneDuplicate(arr, value) {
+    return arr.filter((val) => val === value).length === 1;
 }
 
 function arrayIsValid(arr) {
