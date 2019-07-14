@@ -81,7 +81,7 @@ class Board extends React.Component {
     }
 
     confiqColor(row, col) {
-        const selectedColor = () => this.isSelected(row, col) ? 'green' : 'white'
+        const selectedColor = () => this.isSelected(row, col) ? 'green' : ''
         const staticColor = () => this.static[row - 1][col - 1] ? 'rgb(230, 230, 230)' : selectedColor()
         return staticColor()
     }
