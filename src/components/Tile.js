@@ -7,6 +7,9 @@ class Tile extends React.Component {
     super(props);
     this.state = {
       isStatic: this.props.static[this.props.id[0] - 1][this.props.id[1] - 1],
+      hover: false,
+      active: false,
+      focus: false,
       pStyle: {
         cursor: this.props.static[this.props.id[0] - 1][this.props.id[1] - 1] ? 'default' : 'pointer',
         margin: 0,
@@ -18,6 +21,32 @@ class Tile extends React.Component {
     }
   }
 
+  // Trying to implement hover and focus
+  toggleHover = () => {
+    this.setState({hover: !this.state.hover})
+  }
+
+  toggleActive = () => {
+    this.setState({active: !this.state.active})
+  }
+
+  toggleFocus = () => {
+    this.setState({focus: !this.state.focus})
+  }
+
+  renderHover = () => {
+    let linkStyle = {backgroundColor: this.props.style.backgroundColor};
+    if (this.state.hover) {
+      linkStyle = {backgroundColor: 'green'}
+    } else if (this.state.active) {
+      linkStyle = {backgroundColor: 'blue'}
+    } else if (this.state.focus) {
+      linkStyle = {backgroundColor: 'purple'}
+    }
+    return linkStyle
+  }
+  
+  // Options bar to select tiles value
   displayOptions = () => {
     if (!this.state.isStatic) {
       this.props.onDisplayOptions(this.props.id, this.props.isSelected)
@@ -25,10 +54,19 @@ class Tile extends React.Component {
   }
 
   render() {
-    if (this.props.id[0] === 1 && this.props.id[1] === 1) console.log("tile render")
+    if (this.props.id[0] === 1 && this.props.id[1] === 1) console.log("tile render");
     if (this.props.value === 0) {
       return (
-        <div className="tile" onClick={this.displayOptions} style={this.props.style}>
+        <div 
+          className="tile" 
+          onClick={this.displayOptions}
+          // combinign two style objects into a new empty object
+          style={Object.assign({}, this.props.style, this.renderHover())}
+          onMouseOver={this.toggleHover} 
+          onMouseOut={this.toggleHover} 
+          onMouseUp={this.toggleActive} 
+          onMouseDown={this.toggleActive} 
+          onFocus={this.toggleFocus}>
           <p style={this.state.pStyle}></p>
         </div>
       )
