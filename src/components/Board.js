@@ -34,7 +34,11 @@ class Board extends React.Component {
     displayOptions = (id, isSelected) => {
         this.setState({
             showOptions: !isSelected,
-            selected: !isSelected ? id : [0, 0]
+            selected: id
+        }, () => {
+            if (isSelected) {
+                this.setValue(0, id);
+            }
         })
     }
 
@@ -52,10 +56,10 @@ class Board extends React.Component {
     }
 
     checkAnswer(tile) {
-        const isCorrect = tileIsValid(this.state.tiles, tile[0], tile[1])
+        const tileIsCorrect = tileIsValid(this.state.tiles, tile[0], tile[1])
         const isCompleted = isComplete(this.state.tiles)
-        this.props.setGameBackground(isCorrect, isCompleted)
-        this.updateIncorrectTiles(tile, !isCorrect)
+        this.props.setGameBackground(tileIsCorrect, isCompleted)
+        this.updateIncorrectTiles(tile, !tileIsCorrect)
     }
 
     updateIncorrectTiles(tile, push) {
@@ -94,15 +98,27 @@ class Board extends React.Component {
         }
     }
 
+    confiqBorders(row, col) {
+        const top = row % 3 === 1 ? 'black' : '#ccc'
+        const right = col % 3 === 0 ? 'black' : '#ccc'
+        const bottom = row % 3 === 0 ? 'black' : '#ccc'
+        const left = col % 3 === 1 ? 'black' : '#ccc'
+        const borderObj = {
+            borderWidth: '1px',
+            borderStyle:  'solid',
+            borderColor:  `${top} ${right} ${bottom} ${left}`
+        }
+        return borderObj
+    }
+
     getTileStyle(row, col) {
         const style = {
             backgroundColor: this.confiqColor(row, col),
             cursor: this.static[row - 1][col - 1] ? 'default' : 'pointer',
-            width: `${this.state.size - 2}px`,
-            height: `${this.state.size - 2}px`,
-            border: '1px #ccc solid',
+            width: `${this.state.size}px`,
+            height: `${this.state.size}px`,
         }
-        return style;
+        return Object.assign(style, this.confiqBorders(row, col));
     }
   
     render() {

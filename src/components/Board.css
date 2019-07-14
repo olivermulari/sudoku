@@ -1,5 +1,6 @@
 #board {
     margin: 30px auto 0 auto;
+    border: solid 1px black;
     display: inline-grid;
     position: relative;
     left: 50%;

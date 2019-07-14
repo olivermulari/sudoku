@@ -7,8 +7,8 @@ class ButtonTile extends React.Component {
         super(props);
         this.value = this.props.value;
         this.style = {
-            width: `${this.props.size - 2}px`,
-            height: `${this.props.size - 2}px`
+            width: `${this.props.size}px`,
+            height: `${this.props.size}px`
         }
         this.pStyle = {
             cursor: 'pointer',

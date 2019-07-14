@@ -18,8 +18,8 @@ class Game extends React.Component {
         }
     }
 
-    setBackground = (isCorrect, isCompleted) => {
-        this.setState({isCorrect: isCorrect}, () => {
+    setBackground = (tileIsCorrect, isCompleted) => {
+        this.setState({isCorrect: tileIsCorrect}, () => {
             this.setState({isCompleted: isCompleted})
         })
     }
@@ -29,10 +29,10 @@ class Game extends React.Component {
             if (this.state.isCompleted) {
                 return {backgroundColor: 'green'}
             } else {
-                return {backgroundColor: 'white'}
+                return {backgroundColor: 'lightblue'}
             }
         } else {
-          return {backgroundColor: 'red'}
+          return {backgroundColor: 'lightblue'} //red
         }
     }
 
