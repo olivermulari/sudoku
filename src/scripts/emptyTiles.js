@@ -1,8 +1,6 @@
 import { options } from './options.js';
 
 export function removeValues(board, amount) {
-    tryRemoveThreeValuesPerRow(board);
-
     const r = amount / 2;
     for (let i = 0; i < r; i++) {
         removeRandomValue(board);
@@ -10,6 +8,14 @@ export function removeValues(board, amount) {
 
     for (let i = 0; i < amount - r - 16; i++) {
         removeEasiestValue(board);
+    }
+}
+
+export function removeValuesPerRow(board, amount) {
+    if (amount > 0 && amount < 9) {
+        tryRemoveThreeValuesPerRow(board)
+    } else {
+        console.log("tried to remove too many values")
     }
 }
 

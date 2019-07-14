@@ -9,7 +9,7 @@ class App extends React.Component {
     this.state = {
       tileCheck: false,
       gameStarted: false,
-      difficulty: undefined, 
+      difficulty: 'init', 
     }
   }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
           </div>
           <Game
           tileCheck={this.state.tileCheck}
-          difficulty={this.difficulty}/>
+          difficulty={this.state.difficulty}/>
         </div>
       )
     } else {

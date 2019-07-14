@@ -1,5 +1,5 @@
 import React from 'react';
-import { randomize } from '../scripts/randomize.js';
+import { setBoard } from '../scripts/difficulty';
 import Tile from './Tile';
 import OptionsRow from './OptionsRow';
 import './Board.css';
@@ -9,7 +9,7 @@ class Board extends React.Component {
     constructor(props) {
         console.log("Board constructed!")
         super(props);
-        this.board = randomize();
+        this.board = setBoard(this.props.difficulty);
         this.static = this.mapStaticBoard(this.board);
         this.state = {
             tiles: this.board,

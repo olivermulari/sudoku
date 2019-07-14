@@ -7,14 +7,12 @@ class Game extends React.Component {
         super(props);
         this.state = {
           isCorrect: true,
-          isCompleted: false
+          isCompleted: false,
+          difficulty: this.props.difficulty
         }
         this.headerStyle = {
           padding: '30px 0 0 0',
           textAlign: "center"
-        }
-        this.state = {
-            isCorrect: true
         }
     }
 
@@ -44,6 +42,7 @@ class Game extends React.Component {
                 </h1>
                 <Board 
                 tileCheck={this.props.tileCheck}
+                difficulty= {this.props.difficulty}
                 setGameBackground={this.setBackground}/>
             </div>
         )
