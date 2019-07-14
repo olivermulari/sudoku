@@ -1,5 +1,5 @@
 export function isComplete(board) {
-    return isValid(board) && board.flat().filter((val) => val !== 0).length === 81;
+    return board.flat().filter((val) => val !== 0).length === 81 && isValid(board);
 }
 
 export function isValid(board) {
@@ -7,6 +7,13 @@ export function isValid(board) {
     const colsValid = getColumns(board).every((col) => arrayIsValid(col));
     const boxesValid = getBoxes(board).every((box) => arrayIsValid(box));
     return rowsValid && colsValid && boxesValid;
+}
+
+export function tileIsValid(board, row, col) {
+    const rowValid = arrayIsValid(board[row - 1]);
+    const colValid = arrayIsValid(getColumn(board, col));
+    const boxValid = arrayIsValid(getBox(board, row, col));
+    return rowValid && colValid && boxValid;
 }
 
 function arrayIsValid(arr) {

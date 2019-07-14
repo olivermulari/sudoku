@@ -3,6 +3,7 @@ import { randomize } from '../scripts/randomize.js';
 import Tile from './Tile';
 import OptionsRow from './OptionsRow';
 import './Board.css';
+import { isComplete, tileIsValid } from '../scripts/check.js';
 
 class Board extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Board extends React.Component {
         this.state = {
             tiles: this.board,
             selected: [0, 0],
+            incorrectTiles : [],
             showOptions: false,
             size: 30 //px
         }
@@ -31,11 +33,36 @@ class Board extends React.Component {
     }
 
     setValue = (value, tile) => {
-        const newBoard = this.state.tiles;
-        newBoard[tile[0] - 1][tile[1] - 1] = value;
-        this.setState({
-            tiles: newBoard
-        })
+        if (!this.isSelected(0, 0)) {
+            const newBoard = this.state.tiles;
+            newBoard[tile[0] - 1][tile[1] - 1] = value;
+            this.setState({
+                selected: [0, 0],
+                tiles: newBoard
+            }, () => {
+                this.checkAnswer(tile)
+            })
+        }
+    }
+
+    checkAnswer(tile) {
+        const isCorrect = tileIsValid(this.state.tiles, tile[0], tile[1])
+        const isCompleted = isComplete(this.state.tiles)
+        this.props.setGameBackground(isCorrect, isCompleted)
+        this.updateIncorrectTiles(tile, !isCorrect)
+    }
+
+    updateIncorrectTiles(tile, push) {
+        const index = this.state.incorrectTiles.findIndex((x) => x[0] === tile[0] && x[1] === tile[1])
+        if (push) {
+            if (index === -1) {
+                this.state.incorrectTiles.push(tile)
+            }
+        } else {
+            if (index !== -1) {
+                this.state.incorrectTiles.splice(index, 1)
+            }
+        }
     }
 
     isSelected(row, col) {
