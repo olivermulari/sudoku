@@ -1,10 +1,8 @@
-import { isValid } from './check';
-import { options } from './options';
-import { removeValues } from './empty';
+import { removeValues } from './emptyTiles';
 import { generate } from './generator';
 
 export function randomize() {
     const board = generate();
-    removeValues(board, 35);
+    removeValues(board, 30);
     return board;
 }

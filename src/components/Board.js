@@ -3,7 +3,7 @@ import { randomize } from '../scripts/randomize.js';
 import Tile from './Tile';
 import OptionsRow from './OptionsRow';
 import './Board.css';
-import { isComplete, tileIsValid } from '../scripts/check.js';
+import { isComplete, tileIsValid, isValid } from '../scripts/check.js';
 
 class Board extends React.Component {
     constructor(props) {
@@ -18,6 +18,12 @@ class Board extends React.Component {
             showOptions: false,
             size: 30 //px
         }
+        this.init()
+    }
+
+    init() {
+        // check initially if game happens to be correct
+        this.props.setGameBackground(isValid(this.state.tiles), isComplete(this.state.tiles))
     }
 
     mapStaticBoard = (arr) => {
