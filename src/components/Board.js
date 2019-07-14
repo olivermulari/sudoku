@@ -47,6 +47,7 @@ class Board extends React.Component {
             const newBoard = this.state.tiles;
             newBoard[tile[0] - 1][tile[1] - 1] = value;
             this.setState({
+                showOptions: false,
                 selected: [0, 0],
                 tiles: newBoard
             }, () => {

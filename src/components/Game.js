@@ -39,7 +39,9 @@ class Game extends React.Component {
     render() {
         return (
             <div className="sudoku-game" style={this.gameStyle()}>
-                <h1 style={this.headerStyle}>Sudoku</h1>
+                <h1 style={this.headerStyle}>
+                    {this.state.isCompleted ? 'Completed!' : 'Sudoku'}
+                </h1>
                 <Board 
                 tileCheck={this.props.tileCheck}
                 setGameBackground={this.setBackground}/>
