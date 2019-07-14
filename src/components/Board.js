@@ -59,7 +59,7 @@ class Board extends React.Component {
     }
 
     updateIncorrectTiles(tile, push) {
-        const index = this.state.incorrectTiles.findIndex((x) => x[0] === tile[0] && x[1] === tile[1])
+        const index = this.incorrectIndex(tile[0], tile[1])
         if (push) {
             if (index === -1) {
                 this.state.incorrectTiles.push(tile)
@@ -71,15 +71,32 @@ class Board extends React.Component {
         }
     }
 
+    // returns -1 if is not in incorrect tiles
+    incorrectIndex(row, col) {
+        return this.state.incorrectTiles.findIndex((x) => x[0] === row && x[1] === col)
+    }
+
     isSelected(row, col) {
         return this.state.selected[0] === row && this.state.selected[1] === col
     }
 
+    confiqColor(row, col) {
+        const selectedColor = () => this.isSelected(row, col) ? 'green' : 'white'
+        const staticColor = () => this.static[row - 1][col - 1] ? 'rgb(230, 230, 230)' : selectedColor()
+        return staticColor()
+    }
+
+    confiqHelperClass(row, col) {
+        if (this.props.tileCheck) {
+            return this.incorrectIndex(row, col) === -1 ? 'correct-tile' : 'incorrect-tile'
+        } else {
+            return '';
+        }
+    }
+
     getTileStyle(row, col) {
-        const selectedColor = () => this.isSelected(row, col) ? 'green' : 'white';
-        const color = this.static[row - 1][col - 1] ? 'rgb(230, 230, 230)' : selectedColor();
         const style = {
-            backgroundColor: color,
+            backgroundColor: this.confiqColor(row, col),
             cursor: this.static[row - 1][col - 1] ? 'default' : 'pointer',
             width: `${this.state.size - 2}px`,
             height: `${this.state.size - 2}px`,
@@ -90,23 +107,24 @@ class Board extends React.Component {
   
     render() {
         console.log("board render")
-        let id1 = 1;
-        let id2 = 0;
+        let row = 1;
+        let col = 0;
         const board = (
             <div id="board" style={this.style}>{
                 this.state.tiles.flat().map((value) => {
-                    if (id2 === 9) {
-                        id2 = 0;
-                        id1++;
+                    if (col === 9) {
+                        col = 0;
+                        row++;
                     }
-                    id2++;
+                    col++;
                     return(
                     <Tile 
-                    id={[id1, id2]}
-                    key={[id1, id2]}
-                    style={this.getTileStyle(id1, id2)}
+                    id={[row, col]}
+                    key={[row, col]}
+                    class={this.confiqHelperClass(row, col)}
+                    style={this.getTileStyle(row, col)}
                     static={this.static}
-                    isSelected={this.isSelected(id1, id2)}
+                    isSelected={this.isSelected(row, col)}
                     onDisplayOptions={this.displayOptions}
                     value={value}
                     tileSize={this.state.size}/>

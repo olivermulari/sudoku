@@ -55,12 +55,22 @@ class Tile extends React.Component {
     }
   }
 
+  confiqClassName() {
+    if (this.state.isStatic || this.props.value === 0) {
+      return 'tile'
+    } else {
+      return 'tile ' + this.props.class
+    }
+  }
+
   render() {
-    if (this.row === 1 && this.col === 1) console.log("tile render");
+    if (this.row === 1 && this.col === 1) {
+      console.log("tile render");
+    }
     if (this.props.value === 0) {
       return (
         <div 
-          className="tile" 
+          className={this.confiqClassName()}
           onClick={this.displayOptions}
           // combinign two style objects into a new empty object
           style={Object.assign({}, this.props.style, this.renderHover())}
@@ -74,7 +84,7 @@ class Tile extends React.Component {
       )
     } else {
       return (
-        <div className="tile" style={this.props.style} onClick={this.displayOptions}>
+        <div className={this.confiqClassName()} style={this.props.style} onClick={this.displayOptions}>
           <p className="noselect" style={this.state.pStyle}>{ this.props.value }</p>
         </div>
       )

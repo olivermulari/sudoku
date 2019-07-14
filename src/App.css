@@ -8,3 +8,9 @@
     height: 100vh;
     height: calc(100 * var(--vh));
 }
+
+#settings {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

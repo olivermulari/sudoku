@@ -13,3 +13,11 @@
   position: relative;
   text-align: center;
 }
+
+.correct-tile {
+  background-color: lightgreen !important;
+}
+
+.incorrect-tile {
+  background-color: red !important;
+}
