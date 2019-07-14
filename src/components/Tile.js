@@ -28,13 +28,13 @@ class Tile extends React.Component {
     if (this.props.id[0] === 1 && this.props.id[1] === 1) console.log("tile render")
     if (this.props.value === 0) {
       return (
-        <div onClick={this.displayOptions} style={this.props.style}>
+        <div className="tile" onClick={this.displayOptions} style={this.props.style}>
           <p style={this.state.pStyle}></p>
         </div>
       )
     } else {
       return (
-        <div style={this.props.style} onClick={this.displayOptions}>
+        <div className="tile" style={this.props.style} onClick={this.displayOptions}>
           <p className="noselect" style={this.state.pStyle}>{ this.props.value }</p>
         </div>
       )

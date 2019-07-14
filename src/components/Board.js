@@ -48,9 +48,6 @@ class Board extends React.Component {
         const style = {
             backgroundColor: color,
             cursor: this.static[row - 1][col - 1] ? 'default' : 'pointer',
-            display: 'inline-block',
-            position: 'relative',
-            textAlign: 'center',
             width: `${this.state.size - 2}px`,
             height: `${this.state.size - 2}px`,
             border: '1px #ccc solid',

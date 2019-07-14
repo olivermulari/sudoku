@@ -7,3 +7,9 @@
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
 }
+
+.tile {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
