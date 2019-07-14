@@ -18,13 +18,33 @@ class ButtonTile extends React.Component {
             left: '50%',
             transform: 'translate(-50%, -50%)'
         }
+        this.state = {
+            hover: false,
+        }
+    }
+
+    toggleHover = () => {
+        this.setState({hover: !this.state.hover})
+    }
+
+    renderHover = () => {
+        let linkStyle = {backgroundColor: this.style.backgroundColor};
+        if (this.state.hover) {
+          linkStyle = {backgroundColor: 'white', color: 'black'}
+        }
+        return linkStyle
     }
 
     button = () => (
         <div
         onClick={this.setValue}
         className="tile-button"
-        style={this.style}>
+        style={Object.assign({}, this.style, this.renderHover())}
+        onMouseOver={this.toggleHover} 
+        onMouseOut={this.toggleHover} 
+        onMouseUp={this.toggleHover} 
+        onMouseDown={this.toggleHover} 
+        onFocus={this.toggleHover}>
             <p className="noselect" style={this.pStyle}>{this.value}</p>
         </div>
     );

@@ -5,13 +5,15 @@ class Tile extends React.Component {
   constructor(props) {
     console.log("tile constructed")
     super(props);
+    this.row = this.props.id[0]
+    this.col = this.props.id[1]
     this.state = {
-      isStatic: this.props.static[this.props.id[0] - 1][this.props.id[1] - 1],
+      isStatic: this.props.static[this.row - 1][this.col - 1],
       hover: false,
       active: false,
       focus: false,
       pStyle: {
-        cursor: this.props.static[this.props.id[0] - 1][this.props.id[1] - 1] ? 'default' : 'pointer',
+        cursor: this.props.static[this.row - 1][this.col - 1] ? 'default' : 'pointer',
         margin: 0,
         position: 'absolute',
         top: '50%',
@@ -39,9 +41,9 @@ class Tile extends React.Component {
     if (this.state.hover) {
       linkStyle = {backgroundColor: 'green'}
     } else if (this.state.active) {
-      linkStyle = {backgroundColor: 'blue'}
+      linkStyle = {backgroundColor: 'green'}
     } else if (this.state.focus) {
-      linkStyle = {backgroundColor: 'purple'}
+      linkStyle = {backgroundColor: 'green'}
     }
     return linkStyle
   }
@@ -54,7 +56,7 @@ class Tile extends React.Component {
   }
 
   render() {
-    if (this.props.id[0] === 1 && this.props.id[1] === 1) console.log("tile render");
+    if (this.row === 1 && this.col === 1) console.log("tile render");
     if (this.props.value === 0) {
       return (
         <div 
