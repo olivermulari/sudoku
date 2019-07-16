@@ -1,32 +1,37 @@
 import { options } from './options.js';
 
 export function removeValues(board, amount) {
-    const r = amount / 2;
+    const r = Math.floor(amount / 2);
+
+    // First remove tiles randomly
     for (let i = 0; i < r; i++) {
         removeRandomValue(board);
     }
 
-    for (let i = 0; i < amount - r - 16; i++) {
+    // Then remove the tile with fewest options
+    for (let i = 0; i < amount - r; i++) {
         removeEasiestValue(board);
     }
 }
 
 export function removeValuesPerRow(board, amount) {
     if (amount > 0 && amount < 9) {
-        tryRemoveThreeValuesPerRow(board)
+        for (let i = 1; i <= 9; i++) {
+            removeExistingValueFromRow(board, i)
+        }
+        removeValuesPerRow(board, amount - 1)
     } else {
         console.log("tried to remove too many values")
     }
 }
 
-function tryRemoveThreeValuesPerRow(board) {
-    for (let i = 1; i <= 9; i++) {
-        const r1 = Math.floor(Math.random() * 9 + 1);
-        const r2 = Math.floor(Math.random() * 9 + 1);
-        const r3 = Math.floor(Math.random() * 9 + 1);
-        removeValueFrom(board, i, r1);
-        removeValueFrom(board, i, r2);
-        removeValueFrom(board, i, r3);
+// beacuse sudoku is valid, evry number exist only once in a row
+function removeExistingValueFromRow(board, row) {
+    const existingValues = board[row - 1].filter((val) => val !== 0);
+    if (existingValues.length > 0) {
+        const ri = Math.floor(Math.random() * existingValues.length); // random index
+        const colI = board[row - 1].indexOf(existingValues[ri])
+        board[row - 1][colI] = 0;
     }
 }
 

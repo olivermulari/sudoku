@@ -6,20 +6,20 @@ export function setBoard(difficulty) {
 
     const board = generate();
 
-    removeValuesPerRow(board, 2)
+    removeValuesPerRow(board, 2);
     
     switch (difficulty) {
         case 'easy':
-            removeValues(board, 30);
             break;
         case 'medium':
-            removeValues(board, 40);
+            removeValuesPerRow(board, 1);
+            removeValues(board, 10);
             break;
         case 'hard':
-            removeValues(board, 50);
+            removeValues(board, 35);
             break;
         case 'extreme':
-            removeValues(board, 60);
+            removeValues(board, 50);
             break;
         default:
             break;
