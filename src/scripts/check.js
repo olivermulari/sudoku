@@ -2,6 +2,10 @@ export function isComplete(board) {
     return board.flat().filter((val) => val !== 0).length === 81 && isValid(board);
 }
 
+export function isFilled(board) {
+    return board.flat().filter((val) => val !== 0).length === 81;
+}
+
 export function isValid(board) {
     const rowsValid = board.every((row) => arrayIsValid(row));
     const colsValid = getColumns(board).every((col) => arrayIsValid(col));

@@ -3,7 +3,7 @@ import { setBoard } from '../scripts/difficulty';
 import Tile from './Tile';
 import OptionsRow from './OptionsRow';
 import './Board.css';
-import { isComplete, tileIsValid, isValid } from '../scripts/check.js';
+import { isFilled, tileIsValid, isValid } from '../scripts/check.js';
 
 class Board extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class Board extends React.Component {
 
     init() {
         // check initially if game happens to be correct
-        this.props.setGameBackground(isValid(this.state.tiles), isComplete(this.state.tiles))
+        this.props.setGameState(isValid(this.state.tiles), isFilled(this.state.tiles))
     }
 
     mapStaticBoard = (arr) => {
@@ -58,8 +58,8 @@ class Board extends React.Component {
 
     check() {
         const correct = this.checkAllTiles()
-        const isCompleted = isComplete(this.state.tiles)
-        this.props.setGameBackground(correct, isCompleted)
+        const filled = isFilled(this.state.tiles)
+        this.props.setGameState(correct, filled)
     }
 
     checkAllTiles() {
@@ -106,7 +106,7 @@ class Board extends React.Component {
     }
 
     confiqColor(row, col) {
-        const selectedColor = () => this.isSelected(row, col) ? 'green' : '' // no property
+        const selectedColor = () => this.isSelected(row, col) ? 'rgb(22, 237, 245)' : '' // no property
         const staticColor = () => this.static[row - 1][col - 1] ? 'rgb(230, 230, 230)' : selectedColor()
         return staticColor()
     }

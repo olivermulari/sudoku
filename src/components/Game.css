@@ -1,5 +1,0 @@
-.sudoku-game {
-    width: 100vw;
-    height: 100vh;
-    height: calc(100 * var(--vh));
-}

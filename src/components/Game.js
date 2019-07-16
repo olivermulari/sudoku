@@ -1,5 +1,5 @@
 import React from 'react';
-import './Game.css';
+import '../App.css';
 import Board from './Board';
 
 class Game extends React.Component {
@@ -7,30 +7,37 @@ class Game extends React.Component {
         super(props);
         this.state = {
           isCorrect: true,
+          isFilled: false,
           isCompleted: false,
           difficulty: this.props.difficulty
         }
         this.headerStyle = {
+          color: 'white',
           padding: '30px 0 0 0',
           textAlign: "center"
         }
     }
 
-    setBackground = (tileIsCorrect, isCompleted) => {
-        this.setState({isCorrect: tileIsCorrect}, () => {
-            this.setState({isCompleted: isCompleted})
+    setGameState= (isCorrect, isFilled) => {
+        this.setState({
+            isCorrect: isCorrect,
+            isFilled: isFilled
+        }, () => {
+            this.setState({
+                isCompleted: this.state.isCorrect && this.state.isFilled
+            })
         })
     }
 
     gameStyle = () => {
-        if (this.state.isCorrect) {
+        if (this.state.isFilled) {
             if (this.state.isCompleted) {
-                return {backgroundColor: 'green'}
+                return {background: 'green'}
             } else {
-                return {backgroundColor: 'lightblue'}
+                return {background: 'red'}
             }
         } else {
-          return {backgroundColor: 'lightblue'} //red
+            return
         }
     }
 
@@ -38,12 +45,12 @@ class Game extends React.Component {
         return (
             <div className="sudoku-game" style={this.gameStyle()}>
                 <h1 style={this.headerStyle}>
-                    {this.state.isCompleted ? 'Completed!' : 'Sudoku'}
+                    {this.state.isFilled ? (this.state.isCompleted ? 'Completed!' : 'Try again!') : 'Sudoku'}
                 </h1>
                 <Board 
                 tileCheck={this.props.tileCheck}
                 difficulty= {this.props.difficulty}
-                setGameBackground={this.setBackground}/>
+                setGameState={this.setGameState}/>
             </div>
         )
     }

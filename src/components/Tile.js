@@ -37,16 +37,17 @@ class Tile extends React.Component {
   }
 
   renderHover = () => {
+    const hoverColor = 'rgb(22, 237, 245)'
     if (this.state.isStatic) {
       return {};
     } else {
       let linkStyle = {backgroundColor: this.props.style.backgroundColor};
       if (this.state.hover) {
-        linkStyle = {backgroundColor: 'green'}
+        linkStyle = {backgroundColor: hoverColor}
       } else if (this.state.active) {
-        linkStyle = {backgroundColor: 'green'}
+        linkStyle = {backgroundColor: hoverColor}
       } else if (this.state.focus) {
-        linkStyle = {backgroundColor: 'green'}
+        linkStyle = {backgroundColor: hoverColor}
       }
       return linkStyle
     }
