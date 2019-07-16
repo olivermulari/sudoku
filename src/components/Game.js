@@ -48,7 +48,8 @@ class Game extends React.Component {
                     {this.state.isFilled ? (this.state.isCompleted ? 'Completed!' : 'Try again!') : 'Sudoku'}
                 </h1>
                 <Board 
-                tileCheck={this.props.tileCheck}
+                tileHelper={this.props.tileHelper}
+                enableNotes={this.props.enableNotes}
                 difficulty= {this.props.difficulty}
                 setGameState={this.setGameState}/>
             </div>

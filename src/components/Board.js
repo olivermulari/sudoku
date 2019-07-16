@@ -13,9 +13,11 @@ class Board extends React.Component {
         this.static = this.mapStaticBoard(this.board);
         this.state = {
             tiles: this.board,
+            notes: this.board.map((row) => row.map((val) => [])),
             selected: [0, 0],
             incorrectTiles : [],
             showOptions: false,
+            writingNotes: false,
             size: 30 //px
         }
         this.init()
@@ -31,6 +33,10 @@ class Board extends React.Component {
         return newArr;
     }
 
+    toggleNoteWrite = () => {
+        this.setState({writingNotes: !this.state.writingNotes})
+    }
+
     displayOptions = (id, isSelected) => {
         this.setState({
             showOptions: !isSelected,
@@ -42,17 +48,29 @@ class Board extends React.Component {
         })
     }
 
+    // BUG! When writing enabled, selected should turn into [0, 0]
     setValue = (value, tile) => {
         if (!this.isSelected(0, 0)) {
-            const newBoard = this.state.tiles;
-            newBoard[tile[0] - 1][tile[1] - 1] = value;
-            this.setState({
-                showOptions: false,
-                selected: [0, 0],
-                tiles: newBoard
-            }, () => {
-                this.check(tile)
-            })
+            if (this.state.writingNotes) {
+                const newNotes = this.state.notes;
+                const prevNotes = this.state.notes[tile[0] - 1][tile[1] - 1];
+                if (prevNotes.includes(value)) {
+                    newNotes[tile[0] - 1][tile[1] - 1].splice(prevNotes.indexOf(value), 1);
+                } else {
+                    newNotes[tile[0] - 1][tile[1] - 1].push(value);
+                }
+                this.setState({notes: newNotes})
+            } else {
+                const newBoard = this.state.tiles;
+                newBoard[tile[0] - 1][tile[1] - 1] = value;
+                this.setState({
+                    showOptions: false,
+                    selected: [0, 0],
+                    tiles: newBoard
+                }, () => {
+                    this.check(tile)
+                })
+            }
         }
     }
 
@@ -112,7 +130,7 @@ class Board extends React.Component {
     }
 
     confiqHelperClass(row, col) {
-        if (this.props.tileCheck) {
+        if (this.props.tileHelper) {
             return this.incorrectIndex(row, col) === -1 ? 'correct-tile' : 'incorrect-tile'
         } else {
             return '';
@@ -147,49 +165,65 @@ class Board extends React.Component {
         let row = 1;
         let col = 0;
         const board = (
-            <div id="board" style={this.style}>{
+            <div id="board" style={this.style}> {
                 this.state.tiles.flat().map((value) => {
                     if (col === 9) {
                         col = 0;
                         row++;
                     }
                     col++;
-                    return(
-                    <Tile 
-                    id={[row, col]}
-                    key={[row, col]}
-                    class={this.confiqHelperClass(row, col)}
-                    style={this.getTileStyle(row, col)}
-                    static={this.static}
-                    isSelected={this.isSelected(row, col)}
-                    onDisplayOptions={this.displayOptions}
-                    value={value}
-                    tileSize={this.state.size}/>
-                )})
+                    return (
+                        <Tile 
+                        id={[row, col]}
+                        key={[row, col]}
+                        class={this.confiqHelperClass(row, col)}
+                        style={this.getTileStyle(row, col)}
+                        static={this.static}
+                        isSelected={this.isSelected(row, col)}
+                        onDisplayOptions={this.displayOptions}
+                        enableNotes={this.props.enableNotes}
+                        notes={this.state.notes[row - 1][col - 1]}
+                        value={value}
+                        tileSize={this.state.size}/>
+                    )
+                })
             }</div>
         )
-        const options = (
+        const options = () => {
+            if (this.state.showOptions) {
+                return (
+                    <div>
+                        <OptionsRow
+                        id={10}
+                        key={10}
+                        setValue={this.setValue}
+                        selected={this.state.selected}
+                        tiles={[1, 2, 3, 4, 5, 6, 7, 8, 9]} 
+                        tileSize={this.state.size} />
+                    </div>
+                )
+            }
+        }
+
+        const notesButton = () => {
+            const color = () => this.state.writingNotes ? {backgroundColor: 'rgb(22, 237, 245)'} : {backgroundColor: 'white'}
+            if (this.props.enableNotes) {
+                return (
+                    <button style={Object.assign({}, {position: 'relative', top: '255px'}, color())}
+                        onClick={this.toggleNoteWrite}>
+                        Write Notes
+                    </button>
+                )
+            }
+        }
+
+        return (
             <div>
-                <OptionsRow
-                id={10}
-                key={10}
-                setValue={this.setValue}
-                selected={this.state.selected}
-                tiles={[1, 2, 3, 4, 5, 6, 7, 8, 9]} 
-                tileSize={this.state.size} />
+                {board}
+                {options()}
+                {notesButton()}
             </div>
         )
-
-        if (this.state.showOptions) {
-            return (
-                <div>
-                    {board}
-                    {options}
-                </div>
-            )
-        } else {
-            return board
-        }
     }
 }
 

@@ -7,14 +7,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tileCheck: false,
+      tileHelper: false,
+      enableNotes: false,
       gameStarted: false,
       difficulty: 'init', 
     }
   }
 
   /* problem migth be that this doesn't actually start the game but
-  *  changes app 
+  *  changes app state
   *  
   */
   startGame = (difficulty) => {
@@ -24,9 +25,14 @@ class App extends React.Component {
     })
   }
 
-  toggleTileCheck = () => {
-    const state = this.state.tileCheck
-    this.setState({tileCheck: !state})
+  toggleEnableNotes = () => {
+    const state = this.state.enableNotes
+    this.setState({enableNotes: !state})
+  }
+
+  toggleTileHelper = () => {
+    const state = this.state.tileHelper
+    this.setState({tileHelper: !state})
   }
   
   render() {
@@ -34,10 +40,12 @@ class App extends React.Component {
       return (
         <div id="app">
           <div id="settings">
-            Tile Helper: <input type="checkbox" id="myCheck"  onClick={this.toggleTileCheck}/>
+            Tile Helper: <input type="checkbox" id="tile-helper"  onClick={this.toggleTileHelper}/>
+            Enable notes: <input type="checkbox" id="enable-notes"  onClick={this.toggleEnableNotes}/>
           </div>
           <Game
-          tileCheck={this.state.tileCheck}
+          tileHelper={this.state.tileHelper}
+          enableNotes={this.state.enableNotes}
           difficulty={this.state.difficulty}/>
         </div>
       )

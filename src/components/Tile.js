@@ -1,5 +1,6 @@
 import React from 'react';
 import './Tile.css';
+import Note from './Note'
 
 class Tile extends React.Component {
   constructor(props) {
@@ -72,6 +73,21 @@ class Tile extends React.Component {
     if (this.row === 1 && this.col === 1) {
       console.log("tile render");
     }
+
+    const inside = () => {
+      if (this.props.enableNotes && this.props.value === 0) {
+        return (
+          <Note id={this.props.id} notes={this.props.notes}/>
+        )
+      } else {
+        return (
+          <p className="noselect" style={this.state.pStyle}>{
+            this.props.value === 0 ? '' : this.props.value
+          }</p>
+        )
+      }
+    }
+
     return (
       <div 
         className={this.confiqClassName()}
@@ -83,9 +99,7 @@ class Tile extends React.Component {
         onMouseUp={this.toggleActive} 
         onMouseDown={this.toggleActive} 
         onFocus={this.toggleFocus}>
-        <p className="noselect" style={this.state.pStyle}>{
-          this.props.value === 0 ? '' : this.props.value
-        }</p>
+        { inside() }
       </div>
     )
   }
