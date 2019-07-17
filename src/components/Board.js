@@ -224,11 +224,20 @@ class Board extends React.Component {
             }
         }
 
+        const buttonRow = () => {
+
+            return (
+                <div id="button-row" style={{height: '30px'}}>
+                    {notesButton()}
+                </div>
+            )
+        }
+
         return (
             <div>
+                {buttonRow()}
                 {board}
                 {options()}
-                {notesButton()}
             </div>
         )
     }
