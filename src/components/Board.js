@@ -34,9 +34,10 @@ class Board extends React.Component {
     }
 
     toggleNoteWrite = () => {
-        this.setState({writingNotes: !this.state.writingNotes})
+        this.setState({ writingNotes: !this.state.writingNotes })
     }
 
+    // double click sets value to 0
     displayOptions = (id, isSelected) => {
         this.setState({
             showOptions: !isSelected,
@@ -48,7 +49,6 @@ class Board extends React.Component {
         })
     }
 
-    // BUG! When writing enabled, selected should turn into [0, 0]
     setValue = (value, tile) => {
         if (!this.isSelected(0, 0)) {
             if (this.state.writingNotes) {
@@ -190,7 +190,7 @@ class Board extends React.Component {
             }</div>
         )
         const options = () => {
-            if (this.state.showOptions) {
+            if (this.state.writingNotes || this.state.showOptions) {
                 return (
                     <div>
                         <OptionsRow
