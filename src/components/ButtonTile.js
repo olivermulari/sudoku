@@ -6,11 +6,6 @@ class ButtonTile extends React.Component {
     constructor(props) {
         super(props);
         this.value = this.props.value;
-        this.style = {
-            width: `${this.props.size}px`,
-            height: `${this.props.size}px`,
-            borderRadius: '3px'
-        }
         this.pStyle = {
             cursor: 'pointer',
             margin: 0,
@@ -21,6 +16,11 @@ class ButtonTile extends React.Component {
         }
         this.state = {
             hover: false,
+            style: {
+                width: `${this.props.size}px`,
+                height: `${this.props.size}px`,
+                borderRadius: '3px'
+            }
         }
     }
 
@@ -29,7 +29,7 @@ class ButtonTile extends React.Component {
     }
 
     renderHover = () => {
-        let linkStyle = {backgroundColor: this.style.backgroundColor};
+        let linkStyle = this.props.color;
         if (this.state.hover) {
           linkStyle = {backgroundColor: 'white', color: 'black'}
         }
@@ -40,7 +40,7 @@ class ButtonTile extends React.Component {
         <div
         onClick={this.setValue}
         className="tile-button"
-        style={Object.assign({}, this.style, this.renderHover())}
+        style={Object.assign({}, this.state.style, this.renderHover())}
         onMouseOver={this.toggleHover} 
         onMouseOut={this.toggleHover} 
         onMouseUp={this.toggleHover} 

@@ -5,6 +5,8 @@ import OptionsRow from './OptionsRow';
 import './Board.css';
 import { isFilled, tileIsValid, isValid } from '../scripts/check.js';
 
+import noteIcon from '../assets/img/notes.png';
+
 class Board extends React.Component {
     constructor(props) {
         console.log("Board constructed!")
@@ -191,6 +193,8 @@ class Board extends React.Component {
         )
         const options = () => {
             if (this.state.writingNotes || this.state.showOptions) {
+                const notes = () => this.state.selected[0] !== 0 ? this.state.notes[this.state.selected[0] - 1][this.state.selected[1] - 1] : [];
+                const selectedVal = () => this.state.selected[0] !== 0 ? this.state.tiles[this.state.selected[0] - 1][this.state.selected[1] - 1] : null;
                 return (
                     <div>
                         <OptionsRow
@@ -198,7 +202,10 @@ class Board extends React.Component {
                         key={10}
                         setValue={this.setValue}
                         selected={this.state.selected}
-                        tiles={[1, 2, 3, 4, 5, 6, 7, 8, 9]} 
+                        selectedValue={selectedVal()}
+                        selectedNotes={notes()}
+                        writingNotes={this.state.writingNotes}
+                        tiles={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
                         tileSize={this.state.size} />
                     </div>
                 )
@@ -209,9 +216,9 @@ class Board extends React.Component {
             const color = () => this.state.writingNotes ? {backgroundColor: 'rgb(22, 237, 245)'} : {backgroundColor: 'white'}
             if (this.props.enableNotes) {
                 return (
-                    <button style={Object.assign({}, {position: 'relative', top: '255px'}, color())}
+                    <button style={Object.assign({}, {position: 'relative', top: '0', width: '30px', height: '30px'}, color())}
                         onClick={this.toggleNoteWrite}>
-                        Write Notes
+                        <img src={noteIcon} style={{width: '100%'}} alt="Notes" />
                     </button>
                 )
             }

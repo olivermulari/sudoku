@@ -17,6 +17,12 @@ class OptionsRow extends React.Component {
         this.props.setValue(value, selected)
     }
 
+    figureTileColor = (val) => {
+        const selectedIsNull = this.props.selectedValue === 0
+        const isNote = this.props.selectedNotes.includes(val);
+        return isNote && selectedIsNull ? 'rgb(22, 237, 245)' : '';
+    }
+
     render() {
         let id = 0;
         return (
@@ -29,6 +35,8 @@ class OptionsRow extends React.Component {
                     id={[this.props.id, id]}
                     key={[this.props.id, id]}
                     selected={this.props.selected}
+                    selectedValue={this.props.selectedValue}
+                    color={{backgroundColor: this.figureTileColor(id)}}
                     value={num}
                     setValue={this.setValue}
                     size={this.props.tileSize}/>
