@@ -13,7 +13,6 @@ class Game extends React.Component {
         }
         this.headerStyle = {
           color: 'white',
-          padding: '30px 0 0 0',
           textAlign: "center"
         }
     }

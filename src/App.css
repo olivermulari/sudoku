@@ -16,6 +16,10 @@
     left: 0;
 }
 
+h1 {
+    padding-top: 50px;
+}
+
 .sudoku-game, #game-select {
     background: rgb(30,22,163);
     background: -moz-linear-gradient(90deg, rgba(30,22,163,1) 0%, rgba(74,74,235,1) 26%, rgba(0,255,246,1) 100%);
