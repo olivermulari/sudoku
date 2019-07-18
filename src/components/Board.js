@@ -167,7 +167,7 @@ class Board extends React.Component {
         let row = 1;
         let col = 0;
         const board = (
-            <div id="board" style={this.style}> {
+            <div id="board"> {
                 this.state.tiles.flat().map((value) => {
                     if (col === 9) {
                         col = 0;
@@ -225,7 +225,6 @@ class Board extends React.Component {
         }
 
         const buttonRow = () => {
-
             return (
                 <div id="button-row" style={{height: '30px'}}>
                     {notesButton()}

@@ -4,10 +4,36 @@
   box-sizing: border-box;
 }
 
-#app {
+#app, #settings {
     width: 100vw;
     height: 100vh;
     height: calc(100 * var(--vh));
+}
+
+#nav-bar {
+    color: white;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    list-style: none;
+}
+
+#nav-bar li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+#nav-bar li:hover {
+    color: black;
+    background-color: rgb(22, 237, 245);
 }
 
 #settings {
@@ -16,11 +42,24 @@
     left: 0;
 }
 
-h1 {
-    padding-top: 50px;
+#settings div {
+    color: white;
+    font-size: 2em;
+    margin: 50px auto 0 auto;
+    width: 272px;
+    display: flex;
+    align-items: center;
 }
 
-.sudoku-game, #game-select {
+#setting div input, #setting div p {
+    display: inline;
+}
+
+h1 {
+    padding-top: 80px;
+}
+
+.sudoku-game, #game-select, #settings {
     background: rgb(30,22,163);
     background: -moz-linear-gradient(90deg, rgba(30,22,163,1) 0%, rgba(74,74,235,1) 26%, rgba(0,255,246,1) 100%);
     background: -webkit-linear-gradient(90deg, rgba(30,22,163,1) 0%, rgba(74,74,235,1) 26%, rgba(0,255,246,1) 100%);

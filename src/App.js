@@ -10,7 +10,8 @@ class App extends React.Component {
       tileHelper: false,
       enableNotes: false,
       gameStarted: false,
-      difficulty: 'init', 
+      difficulty: 'init',
+      showing: 'GAME'
     }
   }
 
@@ -34,29 +35,72 @@ class App extends React.Component {
     const state = this.state.tileHelper
     this.setState({tileHelper: !state})
   }
+
+  showOptions = () => {
+    this.setState({showing: 'OPTIONS'})
+  }
+
+  showGame = () => {
+    this.setState({showing: 'GAME'})
+  }
   
   render() {
-    if (this.state.gameStarted) {
-      return (
-        <div id="app">
-          <div id="settings">
-            Tile Helper: <input type="checkbox" id="tile-helper"  onClick={this.toggleTileHelper}/>
-            Enable notes: <input type="checkbox" id="enable-notes"  onClick={this.toggleEnableNotes}/>
-          </div>
+    const game = () => {
+      if (this.state.gameStarted) {
+        return (
           <Game
           tileHelper={this.state.tileHelper}
           enableNotes={this.state.enableNotes}
           difficulty={this.state.difficulty}/>
-        </div>
-      )
-    } else {
+        )
+      } else {
+        return (
+          <GameSelect startGame={this.startGame}/>
+        )
+      }
+    }
+
+    const options = () => {
       return (
-        <div id="app">
-          <GameSelect 
-          startGame={this.startGame}/>
+        <div id="settings">
+          <div style={{marginTop: '150px'}}>
+            <p>Tile Helper: </p>
+            <input type="checkbox" id="tile-helper" checked={this.state.tileHelper} onClick={this.toggleTileHelper}/>
+          </div>
+          <div>
+            <p>Enable notes: </p>
+            <input type="checkbox" id="enable-notes" checked={this.state.enableNotes} onClick={this.toggleEnableNotes}/>
+          </div>
         </div>
       )
     }
+
+    const navBar = () => {
+      return (
+        <ul id="nav-bar">
+          <li onClick={this.showGame}><h3 className="noselect">Game</h3></li>
+          <li onClick={this.showOptions}><h3 className="noselect">Options</h3></li>
+        </ul>
+      )
+    }
+
+    const content = () => {
+      switch (this.state.showing) {
+        case 'GAME':
+          return game()
+        case 'OPTIONS':
+          return options()
+        default:
+          return {};
+      }
+    }
+
+    return (
+      <div id="app">
+        {content()}
+        {navBar()}
+      </div>
+    )
   }
 }
 

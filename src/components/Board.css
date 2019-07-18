@@ -1,6 +1,7 @@
 #board {
+    width: 272px;
     border: solid 1px black;
-    display: inline-grid;
+    display: grid; /*inline-grid*/
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -9,8 +10,10 @@
 }
 
 #button-row {
+    width: 272px;
     display: grid;
     position: relative;
+    justify-items: end;
     left: 50%;
-    transform: translateX(105px);
+    transform: translateX(-50%);
 }
