@@ -1,9 +1,9 @@
 .tile-button {
-    cursor: pointer;
-    color: white;
-    background-color: darkgray;
-    display: inline-block;
-    position: relative;
-    text-align: center;
-    border: 1px white solid;
+  cursor: pointer;
+  color: white;
+  background-color: darkgray;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  border: 1px white solid;
 }

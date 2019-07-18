@@ -4,88 +4,107 @@
   box-sizing: border-box;
 }
 
-#app, #settings {
-    width: 100vw;
-    height: 100vh;
-    height: calc(100 * var(--vh));
+#app,
+#settings {
+  width: 100vw;
+  height: 100vh;
+  height: calc(100 * var(--vh));
 }
 
 #nav-bar {
-    color: white;
-    background-color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 30px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    list-style: none;
+  color: white;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
 }
 
 #nav-bar li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.5s;
 }
 
 #nav-bar li:hover {
-    color: black;
-    background-color: rgb(22, 237, 245);
+  color: black;
+  background-color: rgb(22, 237, 245);
 }
 
 #settings {
-    position: absolute;
-    top: 0;
-    left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #settings div {
-    color: white;
-    font-size: 2em;
-    margin: 50px auto 0 auto;
-    width: 272px;
-    display: flex;
-    align-items: center;
+  color: white;
+  font-size: 2em;
+  margin: 50px auto 0 auto;
+  width: 272px;
+  display: flex;
+  align-items: center;
 }
 
-#setting div input, #setting div p {
-    display: inline;
+#setting div input,
+#setting div p {
+  display: inline;
 }
 
 h1 {
-    padding-top: 80px;
+  padding-top: 80px;
 }
 
-.sudoku-game, #game-select, #settings {
-    background: rgb(30,22,163);
-    background: -moz-linear-gradient(90deg, rgba(30,22,163,1) 0%, rgba(74,74,235,1) 26%, rgba(0,255,246,1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(30,22,163,1) 0%, rgba(74,74,235,1) 26%, rgba(0,255,246,1) 100%);
-    background: linear-gradient(90deg, rgba(30,22,163,1) 0%, rgba(74,74,235,1) 26%, rgba(0,255,246,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e16a3",endColorstr="#00fff6",GradientType=1);
+.sudoku-game,
+#game-select,
+#settings {
+  background: rgb(30, 22, 163);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(30, 22, 163, 1) 0%,
+    rgba(74, 74, 235, 1) 26%,
+    rgba(0, 255, 246, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(30, 22, 163, 1) 0%,
+    rgba(74, 74, 235, 1) 26%,
+    rgba(0, 255, 246, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(30, 22, 163, 1) 0%,
+    rgba(74, 74, 235, 1) 26%,
+    rgba(0, 255, 246, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e16a3",endColorstr="#00fff6",GradientType=1);
 }
 
 .sudoku-game {
-    width: 100vw;
-    height: 100vh;
-    height: calc(100 * var(--vh));
+  width: 100vw;
+  height: 100vh;
+  height: calc(100 * var(--vh));
 }
 
 #game-select {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    height: calc(100 * var(--vh));
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: calc(100 * var(--vh));
 }
 
-#game-select button{
-    font-size: 1.1em;
-    position: relative;
-    top: 100px;
-    width: 150px;
-    height: 50px;
-    margin: auto;
-    display: block;
+#game-select button {
+  font-size: 1.1em;
+  position: relative;
+  top: 100px;
+  width: 150px;
+  height: 50px;
+  margin: auto;
+  display: block;
 }

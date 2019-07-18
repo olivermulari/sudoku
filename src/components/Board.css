@@ -1,19 +1,19 @@
 #board {
-    width: 272px;
-    border: solid 1px black;
-    display: grid; /*inline-grid*/
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    grid-template-columns: repeat(9, 30px);
-    grid-template-rows: repeat(9, 30px);
+  width: 272px;
+  border: solid 1px black;
+  display: grid; /*inline-grid*/
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  grid-template-columns: repeat(9, 30px);
+  grid-template-rows: repeat(9, 30px);
 }
 
 #button-row {
-    width: 272px;
-    display: grid;
-    position: relative;
-    justify-items: end;
-    left: 50%;
-    transform: translateX(-50%);
+  width: 272px;
+  display: grid;
+  position: relative;
+  justify-items: end;
+  left: 50%;
+  transform: translateX(-50%);
 }
