@@ -42,10 +42,7 @@ class ButtonTile extends React.Component {
         className="tile-button"
         style={Object.assign({}, this.state.style, this.renderHover())}
         onMouseOver={this.toggleHover} 
-        onMouseOut={this.toggleHover} 
-        onMouseUp={this.toggleHover} 
-        onMouseDown={this.toggleHover} 
-        onFocus={this.toggleHover}>
+        onMouseOut={this.toggleHover}>
             <p className="noselect" style={this.pStyle}>{this.value}</p>
         </div>
     );

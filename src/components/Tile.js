@@ -95,10 +95,7 @@ class Tile extends React.Component {
         // combinign two style objects into a new empty object
         style={Object.assign({}, this.props.style, this.renderHover())}
         onMouseOver={this.toggleHover} 
-        onMouseOut={this.toggleHover} 
-        onMouseUp={this.toggleActive} 
-        onMouseDown={this.toggleActive} 
-        onFocus={this.toggleFocus}>
+        onMouseOut={this.toggleHover}>
         { inside() }
       </div>
     )
