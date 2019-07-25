@@ -11,7 +11,7 @@ class App extends React.Component {
       enableNotes: false,
       gameStarted: false,
       difficulty: 'init',
-      showing: 'GAME'
+      showOptions: false,
     }
   }
 
@@ -26,6 +26,13 @@ class App extends React.Component {
     })
   }
 
+  newGame = () => {
+    this.setState({
+      gameStarted: false,
+      showOptions: false
+    })
+  }
+
   toggleEnableNotes = () => {
     const state = this.state.enableNotes
     this.setState({enableNotes: !state})
@@ -37,11 +44,11 @@ class App extends React.Component {
   }
 
   showOptions = () => {
-    this.setState({showing: 'OPTIONS'})
+    this.setState({showOptions: true})
   }
 
   showGame = () => {
-    this.setState({showing: 'GAME'})
+    this.setState({showOptions: false})
   }
   
   render() {
@@ -61,43 +68,42 @@ class App extends React.Component {
     }
 
     const options = () => {
-      return (
-        <div id="settings">
-          <div style={{marginTop: '150px'}}>
-            <p>Tile Helper: </p>
-            <input type="checkbox" id="tile-helper" checked={this.state.tileHelper} onClick={this.toggleTileHelper}/>
+      if (this.state.showOptions) {
+        return (
+          <div id="settings-page">
+            <div id="settings">
+              <div style={{marginTop: '150px'}}>
+                <p>Tile Helper: </p>
+                <input type="checkbox" id="tile-helper" checked={this.state.tileHelper} onClick={this.toggleTileHelper}/>
+              </div>
+              <div>
+                <p>Enable notes: </p>
+                <input type="checkbox" id="enable-notes" checked={this.state.enableNotes} onClick={this.toggleEnableNotes}/>
+              </div>
+              <button onClick={this.newGame}>Start New Game</button>
+            </div>
           </div>
-          <div>
-            <p>Enable notes: </p>
-            <input type="checkbox" id="enable-notes" checked={this.state.enableNotes} onClick={this.toggleEnableNotes}/>
-          </div>
-        </div>
-      )
+        )
+      } else {
+        return;
+      }
     }
 
     const navBar = () => {
       return (
         <ul id="nav-bar">
           <li onClick={this.showGame}><h3 className="noselect">Game</h3></li>
+          <p></p>
+          <p></p>
           <li onClick={this.showOptions}><h3 className="noselect">Options</h3></li>
         </ul>
       )
     }
 
-    const content = () => {
-      switch (this.state.showing) {
-        case 'GAME':
-          return game()
-        case 'OPTIONS':
-          return options()
-        default:
-          return {};
-      }
-    }
-
     return (
       <div id="app">
-        {content()}
+        {game()}
+        {options()}
         {navBar()}
       </div>
     )

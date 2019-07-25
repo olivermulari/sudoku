@@ -4,16 +4,26 @@
   box-sizing: border-box;
 }
 
+body,
 #app,
-#settings {
+#settings-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
   height: calc(100 * var(--vh));
+
+  user-select: none;
+}
+
+#app {
+  overflow: auto;
 }
 
 #nav-bar {
   color: white;
-  background-color: black;
   position: fixed;
   top: 0;
   left: 0;
@@ -22,6 +32,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   list-style: none;
+  z-index: 100;
 }
 
 #nav-bar li {
@@ -37,10 +48,21 @@
   background-color: rgb(22, 237, 245);
 }
 
+#setting-page {
+  z-index: 10;
+}
+
 #settings {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: grid;
+  width: 100vw;
+  height: 400px;
+  grid-auto-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+#settings button {
+  font-size: 1.5em;
+  margin: 20px;
 }
 
 #settings div {
@@ -63,7 +85,7 @@ h1 {
 
 .sudoku-game,
 #game-select,
-#settings {
+#settings-page {
   background: rgb(30, 22, 163);
   background: -moz-linear-gradient(
     90deg,
