@@ -6,7 +6,8 @@
 
 body,
 #app,
-#settings-page {
+#settings-page,
+.sudoku-game {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,10 +17,6 @@ body,
   height: calc(100 * var(--vh));
 
   user-select: none;
-}
-
-#app {
-  overflow: auto;
 }
 
 #nav-bar {
