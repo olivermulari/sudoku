@@ -2,6 +2,7 @@ import React from 'react';
 import { setBoard } from '../scripts/difficulty';
 import Tile from './Tile';
 import OptionsRow from './OptionsRow';
+import HoverBoard from './HoverBoard';
 import './Board.css';
 import { isFilled, tileIsValid, isValid } from '../scripts/check.js';
 
@@ -162,10 +163,9 @@ class Board extends React.Component {
     }
   
     render() {
-        console.log("board render")
         let row = 1;
         let col = 0;
-        const board = (
+        const board = () =>
             <div id="board"> {
                 this.state.tiles.flat().map((value) => {
                     if (col === 9) {
@@ -188,8 +188,11 @@ class Board extends React.Component {
                         tileSize={this.state.size}/>
                     )
                 })
-            }</div>
-        )
+            }
+                <HoverBoard 
+                selected={this.state.selected}/>
+            </div>
+
         const options = () => {
             if (this.state.writingNotes || this.state.showOptions) {
                 const notes = () => this.state.selected[0] !== 0 ? this.state.notes[this.state.selected[0] - 1][this.state.selected[1] - 1] : [];
@@ -232,9 +235,9 @@ class Board extends React.Component {
         }
 
         return (
-            <div>
+            <div className="container">
                 {buttonRow()}
-                {board}
+                {board()}
                 {options()}
             </div>
         )
