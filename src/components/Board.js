@@ -9,7 +9,6 @@ import noteIcon from '../assets/img/notes.png';
 
 class Board extends React.Component {
     constructor(props) {
-        console.log("Board constructed!")
         super(props);
         this.board = setBoard(this.props.difficulty);
         this.static = this.mapStaticBoard(this.board);
