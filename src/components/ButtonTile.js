@@ -17,9 +17,9 @@ class ButtonTile extends React.Component {
         this.state = {
             hover: false,
             style: {
-                width: `${30}px`,
-                height: `${30}px`,
-                borderRadius: '3px'
+                width: `var(--tile)`,
+                height: `var(--tile)`,
+                borderRadius: 'calc(var(--tile) * 0.1)'
             }
         }
     }

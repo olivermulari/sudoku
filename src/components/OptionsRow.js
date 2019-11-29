@@ -7,9 +7,9 @@ class OptionsRow extends React.Component {
     this.style = {
       margin: "15px auto 0 auto",
       backgroundColor: "rgb(255, 255, 255)",
-      width: `${30 * 9 + 2}px`,
-      height: `${30 + 2}px`,
-      border: "1px white solid"
+      width: `calc(calc(9 * var(--tile)) + calc(2 * var(--border)))`,
+      height: `calc(var(--tile) + calc(2 * var(--border)))`,
+      border: "var(--border) white solid"
     };
   }
 

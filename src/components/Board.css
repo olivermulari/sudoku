@@ -3,6 +3,21 @@
   --border: 2px;
 }
 
+@media screen and (min-width: 600px) {
+  :root {
+    --tile: 40px;
+    --border: 5px;
+    font-size: 1.33em;
+  }
+  @media screen and (min-width: 1000px) {
+    :root {
+      --tile: 50px;
+      --border: 10px;
+      font-size: 1.66em;
+    }
+  }
+}
+
 
 .container {
   position: relative;
