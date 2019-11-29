@@ -20,7 +20,6 @@ class Board extends React.Component {
             incorrectTiles : [],
             showOptions: false,
             writingNotes: false,
-            size: 30 //px
         }
         this.init()
     }
@@ -156,8 +155,6 @@ class Board extends React.Component {
         const style = {
             backgroundColor: this.confiqColor(row, col),
             cursor: this.static[row - 1][col - 1] ? 'default' : 'pointer',
-            width: `${this.state.size}px`,
-            height: `${this.state.size}px`,
         }
         return Object.assign(style, this.confiqBorders(row, col));
     }
@@ -207,8 +204,7 @@ class Board extends React.Component {
                         selectedValue={selectedVal()}
                         selectedNotes={notes()}
                         writingNotes={this.state.writingNotes}
-                        tiles={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-                        tileSize={this.state.size} />
+                        tiles={[1, 2, 3, 4, 5, 6, 7, 8, 9]}/>
                     </div>
                 )
             }

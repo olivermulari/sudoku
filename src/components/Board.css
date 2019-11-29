@@ -1,20 +1,26 @@
+:root {
+  --tile: 30px;
+  --border: 2px;
+}
+
+
 .container {
   position: relative;
 }
 
 #board {
-  width: 272px;
-  border: solid 1px black;
+  width: calc(calc(9 * var(--tile)) + calc(2 * var(--border)));
+  border: solid var(--border) black;
   display: grid; /*inline-grid*/
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  grid-template-columns: repeat(9, 30px);
-  grid-template-rows: repeat(9, 30px);
+  grid-template-columns: repeat(9, var(--tile));
+  grid-template-rows: repeat(9, var(--tile));
 }
 
 #button-row {
-  width: 272px;
+  width: calc(calc(9 * var(--tile)) + calc(2 * var(--border)));
   display: grid;
   position: relative;
   justify-items: end;
@@ -28,17 +34,47 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 270px;
-  height: 270px;
+  width: calc(9 * var(--tile));
+  height: calc(9 * var(--tile));
 
   display: grid; /*inline-grid*/
+}
+
+.hoverboard-row {
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+}
+.hoverboard-col {
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
+.hoverboard-box {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
 
-.hb-chunck {
-  width: 90px;
-  height: 90px;
+.hb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  box-sizing: content-box;
 
   background-color: rgba(22, 237, 245, 0.2);
+  border: solid var(--border) rgb(22, 237, 245);
+}
+
+.hb-chunck {
+  width: calc(3 * var(--tile));
+  height: calc(3 * var(--tile));
+}
+
+.hb-row {
+  width: calc(9 * var(--tile));
+  height: var(--tile);
+}
+
+.hb-col {
+  width: var(--tile);
+  height: calc(9 * var(--tile));
 }
